@@ -1,19 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardBehaviour : MonoBehaviour
 {
     [SerializeField] private List<CellBehaviour> _cells;
-    // Start is called before the first frame update
-    void Start()
+    
+    public CellBehaviour GetNexCell(CellBehaviour actualCell, int amountOfCellsToMove)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        var index = _cells.FindIndex(x =>  x == actualCell);
+        var nextCellIndex = index + amountOfCellsToMove;
+    
+        if(nextCellIndex > _cells.Count)
+        {
+            return _cells[_cells.Count- 1];
+        }
+        if(nextCellIndex < 0)
+        {
+            return _cells[0];
+        }
+        return _cells[nextCellIndex];
         
     }
 }
