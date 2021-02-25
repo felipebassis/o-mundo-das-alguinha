@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
-{
-    public CellBehaviour ActualCell { get; set; }
-}
-=======
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,5 +12,9 @@ public class PlayerMovement : MonoBehaviour
         set { actualCell = value; Debug.Log(actualCell.name); }
     }
 
+    public void SetInnitialPosition(CellBehaviour cellBehaviour)
+    {
+        actualCell = cellBehaviour;
+    }
+
 }
->>>>>>> 1c3c20e (Criação de componentes para movimentação do jogador)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Jogador;
 using Turno;
@@ -36,12 +37,12 @@ public class Turn : MonoBehaviour
             {TurnStates.PLAYER_WIN, (_playerWin, () => WinGame()) }
         };
 
-         _playerSelection.ShowElements();
+        _playerSelection.ShowElements();
     }
 
     public void ExecuteTurn()
     {
-        var(_, turnAction) = _actionMap[currentState];
+        var (_, turnAction) = _actionMap[currentState];
 
         var nextState = turnAction.Invoke();
 
@@ -56,6 +57,8 @@ public class Turn : MonoBehaviour
     {
         players = _playerSelection.GetPlayers();
 
+        _playerMovement.SetInnitialPosition(players.Select(x => x.GetPlayerMovement()).ToArray());
+
         currentPlayerIndex = 0;
         _startTurn.SetPlayer(currentPlayer);
 
@@ -69,7 +72,7 @@ public class Turn : MonoBehaviour
     {
         var quantityToWalk = _diceRoll.RollDice();
 
-        _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
+        _playerMovement.SetPlayerMovement(currentPlayer.GetPlayerMovement(), quantityToWalk);
 
         return TurnStates.DICE_MOVEMENT;
     }
@@ -113,23 +116,23 @@ public class Turn : MonoBehaviour
             return TurnStates.FINISHED_TURN;
         }
 
-        _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
+        _playerMovement.SetPlayerMovement(currentPlayer.GetPlayerMovement(), quantityToWalk);
 
         return TurnStates.EVENT_MOVEMENT;
     }
 
     private TurnStates GetPlayerAnswer()
     {
-        var quantityToWalk =_questionCardExecuter.GetQuantityToMove();
+        var quantityToWalk = _questionCardExecuter.GetQuantityToMove();
 
-        _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
+        _playerMovement.SetPlayerMovement(currentPlayer.GetPlayerMovement(), quantityToWalk);
 
         return TurnStates.EVENT_MOVEMENT;
     }
 
     private TurnStates EndTurn()
     {
-        var playerWon = _playerMovement.IsWinner(currentPlayer);
+        var playerWon = _playerMovement.IsWinner(currentPlayer.GetPlayerMovement());
 
         if (playerWon)
         {
