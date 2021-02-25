@@ -1,25 +1,41 @@
 ﻿using UnityEngine;
 
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Character", order = 1)]
 public class Character : ScriptableObject, ICharacter
 {
-    private Sprite _sprite;
+    [SerializeField] private Sprite _sprite;
 
-    private string _name;
+    [SerializeField] private string _name;
 
-    private Color _color;
-
-    public Sprite getSprite()
+    [SerializeField] private Color _color;
+    
+    public Sprite GetSprite()
     {
         return _sprite;
     }
 
-    public string getName()
+    public void SetSprite(Sprite sprite)
+    {
+        _sprite = sprite;
+    }
+
+    public string GetName()
     {
         return _name;
     }
 
-    public Color getColor()
+    public void SetName(string name)
+    {
+        _name = name;
+    }
+
+    public Color GetColor()
     {
         return _color;
+    }
+
+    public void SetColor(Color color)
+    {
+        _color = color;
     }
 }

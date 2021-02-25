@@ -2,9 +2,12 @@
 
 public interface ICharacter
 {
-    Sprite getSprite();
+    Sprite GetSprite();
+    void SetSprite(Sprite sprite);
 
-    string getName();
+    string GetName();
+    void SetName(string name);
 
-    Color getColor();
+    Color GetColor();
+    void SetColor(Color color);
 }
