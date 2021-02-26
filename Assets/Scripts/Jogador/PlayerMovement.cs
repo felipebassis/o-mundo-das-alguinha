@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int ActualCellNumber => actualCell.CellNumber;
     private CellBehaviour actualCell;
 
     public CellBehaviour ActualCell
@@ -17,4 +16,8 @@ public class PlayerMovement : MonoBehaviour
         actualCell = cellBehaviour;
     }
 
+    public void MoveTo(Transform positionToGo)
+    {
+        gameObject.transform.position = positionToGo.position;
+    }
 }

@@ -1,20 +1,32 @@
-﻿using System;
-using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardBehaviour : MonoBehaviour
 {
-    [SerializeField] private List<CellBehaviour> _cells;
+    [SerializeField] private List<CellPosition> _cells;
     
-    public CellBehaviour GetFirstCell()
+    public CellPosition GetFirstPosition()
     {
         return _cells[0];
     }
 
-    public CellBehaviour GetNexCell(CellBehaviour actualCell, int amountOfCellsToMove)
+    public CellPosition GetActualPosition(CellBehaviour actualCell)
     {
-        var index = _cells.FindIndex(x =>  x == actualCell);
+        var actualPosition = _cells.FirstOrDefault(x => x.Cell == actualCell);
+
+        if (!actualPosition)
+        {
+            Debug.LogError("Não foi encontrado nenhuma celula");
+            return GetFirstPosition();
+        }
+
+        return actualPosition;
+    }
+
+    public CellPosition GetNexPosition(CellBehaviour actualCell, int amountOfCellsToMove)
+    {
+        var index = _cells.FindIndex(x =>  x.Cell == actualCell);
         var nextCellIndex = index + amountOfCellsToMove;
     
         if(nextCellIndex >= _cells.Count)
@@ -29,8 +41,8 @@ public class BoardBehaviour : MonoBehaviour
         
     }
 
-    public bool isLastCell(CellBehaviour actualCell)
+    public bool IsLastCell(CellBehaviour actualCell)
     {
-        return actualCell == _cells[_cells.Count - 1];
+        return actualCell == _cells[_cells.Count - 1].Cell;
     }
 }

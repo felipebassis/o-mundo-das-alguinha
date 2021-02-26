@@ -16,16 +16,16 @@ public class BoardMover : IPlayerBoardMovement
 
     public override bool IsWinner(PlayerMovement player)
     {
-        return board.isLastCell(player.ActualCell);
+        return board.IsLastCell(player.ActualCell);
     }
 
     public override void SetInnitialPosition(PlayerMovement[] players)
     {
-        var firstPosition = board.GetFirstCell();
+        var firstPosition = board.GetFirstPosition();
 
         foreach(var player in players)
         {
-            player.SetInnitialPosition(firstPosition);
+            firstPosition.AddPlayerPosition(player);
         }
     }
 
@@ -44,10 +44,13 @@ public class BoardMover : IPlayerBoardMovement
     {
         
     }
+
     private void MovePlayer()
     {
-        var actualCell = playerMovement.ActualCell;
-        var nextCell = board.GetNexCell(actualCell, amountOfCellsToMove);
-        playerMovement.ActualCell = nextCell;
+        var actualPosition = board.GetActualPosition(playerMovement.ActualCell);
+        actualPosition.RemovePlayerPosition(playerMovement);
+
+        var nextPosition = board.GetNexPosition(actualPosition.Cell, amountOfCellsToMove);
+        nextPosition.AddPlayerPosition(playerMovement);
     }
 }
