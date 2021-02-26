@@ -1,26 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class CharacterSelector : IPlayerSelection
+namespace Jogador
 {
-    
-    private IPlayerDetails _players;
+	public class CharacterSelector : IPlayerSelection
+	{
+		[SerializeField] private GameObject confirmedPlayers;
+		[SerializeField] private SingleCharacterSelector[] singleCharacterSelector;
 
-    public override void ShowElements()
-    {
-        throw new System.NotImplementedException();
-    }
+		public override void ShowElements()
+		{
+			confirmedPlayers.SetActive(true);
+		}
 
-    protected override void HideComponent()
-    {
-        throw new System.NotImplementedException();
-    }
+		protected override void HideComponent()
+		{
+			confirmedPlayers.SetActive(false);
+		}
 
-    public override IPlayerDetails[] GetPlayers()
-    {
-        throw new System.NotImplementedException();
-    }
-    
+		public override IPlayerDetails[] GetPlayers()
+		{
+			var players = new IPlayerDetails[5];
+
+			for (var i = 0; i < 5; i++)
+			{
+				players[i] = singleCharacterSelector[i].GetPlayerCharacter();
+			}
+
+			return players;
+		}
+
+		public void ConfirmPlayers()
+		{
+			HideComponent();
+		}
+	}
+
+
 }

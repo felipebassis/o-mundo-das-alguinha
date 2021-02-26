@@ -1,6 +1,11 @@
-﻿using UnityEngine;
-
-public interface IPlayerDetails
+﻿namespace Jogador
 {
-    Character getCharacter();
+    public interface IPlayerDetails
+    {
+        Character GetCharacter();
+    
+        int GetPosition();
+
+        void SetPosition(int playerCell);
+    }
 }

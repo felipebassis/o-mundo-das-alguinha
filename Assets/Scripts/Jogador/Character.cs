@@ -3,39 +3,39 @@
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Character", order = 1)]
 public class Character : ScriptableObject, ICharacter
 {
-    [SerializeField] private Sprite _sprite;
+    [SerializeField] private Sprite sprite;
 
-    [SerializeField] private string _name;
+    [SerializeField] private string name;
 
-    [SerializeField] private Color _color;
+    [SerializeField] private Color color;
     
     public Sprite GetSprite()
     {
-        return _sprite;
+        return sprite;
     }
 
     public void SetSprite(Sprite sprite)
     {
-        _sprite = sprite;
+        this.sprite = sprite;
     }
 
     public string GetName()
     {
-        return _name;
+        return name;
     }
 
     public void SetName(string name)
     {
-        _name = name;
+        this.name = name;
     }
 
     public Color GetColor()
     {
-        return _color;
+        return color;
     }
 
     public void SetColor(Color color)
     {
-        _color = color;
+        this.color = color;
     }
 }

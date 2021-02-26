@@ -1,20 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Tabuleiro;
+﻿using Tabuleiro;
 using UnityEngine;
 
-public class Player : ScriptableObject, IPlayerDetails
+namespace Jogador
 {
-    
-    private Character _character;
+	public class Player : ScriptableObject, IPlayerDetails
+	{
+		private Character _character;
 
-    private int _position;
-    
-    private ICard[] _drawnCards;
+		private int _position;
 
-    public Character getCharacter()
-    {
-        return _character;
-    }
-    
+		private ICard[] _drawnCards;
+	
+		public Character GetCharacter()
+		{
+			return _character;
+		}
+
+		public void SetCharacter(Character selectedChar)
+		{
+			_character = selectedChar;
+		}
+		public void SetPosition(int playerCell)
+		{
+			_position = playerCell;
+		}
+
+		public int GetPosition()
+		{
+			return _position;
+		}
+	}
 }

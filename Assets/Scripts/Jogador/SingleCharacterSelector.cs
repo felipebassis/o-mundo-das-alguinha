@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Jogador;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,13 +7,27 @@ public class SingleCharacterSelector : MonoBehaviour
 {
 	[SerializeField] private Character[] characters;
 
-	[SerializeField] private Text _characterDisplayedName;
+	[SerializeField] private Text characterDisplayedName;
 
-	[SerializeField] private Image _characterSpriteImage;
+	[SerializeField] private Image characterSpriteImage;
 
 	private bool _selected;
 
 	private int _currentCharacterIndex;
+
+	public Player GetPlayerCharacter()
+	{
+		var selectedCharacter = characters[_currentCharacterIndex];
+		if (_selected)
+		{
+			var player = ScriptableObject.CreateInstance<Player>();  
+			player.SetCharacter(selectedCharacter);
+			return player;
+		}
+
+		return null;
+
+	}
 
 	public void NextCharacter()
 	{
@@ -26,8 +41,8 @@ public class SingleCharacterSelector : MonoBehaviour
 		}
 
 		ShowCharacter();
-	}	
-	
+	}
+
 	public void PreviousCharacter()
 	{
 		if (_currentCharacterIndex - 1 < 0)
@@ -45,15 +60,15 @@ public class SingleCharacterSelector : MonoBehaviour
 	private void ShowCharacter()
 	{
 		var currentCharacter = characters[_currentCharacterIndex];
-		_characterDisplayedName.text = currentCharacter.GetName();
-		_characterSpriteImage.sprite = currentCharacter.GetSprite();
+		characterDisplayedName.text = currentCharacter.GetName();
+		characterSpriteImage.sprite = currentCharacter.GetSprite();
 	}
 
 	public void ConfirmSelection()
 	{
 		_selected = true;
 	}
-	
+
 	public void CancelSelection()
 	{
 		_selected = false;
