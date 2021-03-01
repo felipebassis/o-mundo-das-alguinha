@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Jogador;
+using Turno;
 using UnityEngine;
 
 public class Turn : MonoBehaviour
@@ -7,7 +9,7 @@ public class Turn : MonoBehaviour
     [SerializeField] private IPlayerSelection _playerSelection;
     [SerializeField] private IStartComponent _startTurn;
     [SerializeField] private IMoveComponent _diceRoll;
-    [SerializeField] private IPlayerBoardMovement _playerMovement;
+    [SerializeField] private PlayerBoardMovement _playerMovement;
     [SerializeField] private IEventComponent _eventCardExecuter;
     [SerializeField] private IMoveComponent _questionCardExecuter;
     [SerializeField] private ITurnComponent _finishedTurn;
