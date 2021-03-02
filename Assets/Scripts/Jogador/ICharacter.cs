@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
 
-public interface ICharacter
+namespace Jogador
 {
-	Sprite GetSprite();
-	void SetSprite(Sprite sprite);
-
-	string GetName();
-	void SetName(string name);
-
-	Color GetColor();
-	void SetColor(Color color);
+	public interface ICharacter
+	{
+		Sprite GetSprite();
+	}
 }

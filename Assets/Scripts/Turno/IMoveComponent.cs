@@ -1,4 +1,7 @@
-﻿public abstract class IMoveComponent: ITurnComponent
+﻿namespace Turno
 {
-    public abstract int GetQuantityToMove();
+    public abstract class MoveComponent: TurnComponent
+    {
+        public abstract int GetQuantityToMove();
+    }
 }

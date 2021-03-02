@@ -1,6 +1,9 @@
 ﻿using Jogador;
 
-public abstract class IPlayerSelection: ITurnComponent
+namespace Turno
 {
-    public abstract IPlayerDetails[] GetPlayers();
+    public abstract class PlayerSelection: TurnComponent
+    {
+        public abstract IPlayerDetails[] GetPlayers();
+    }
 }

@@ -1,23 +1,26 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class ITurnComponent : MonoBehaviour
+namespace Turno
 {
-    private Action finalizeMethod;
-
-    private void Awake()
+    public abstract class TurnComponent : MonoBehaviour
     {
-        finalizeMethod = FindObjectOfType<Turn>().ExecuteTurn;
-        HideComponent();
-    }
+        private Action _finalizeMethod;
 
-    public abstract void ShowElements();
+        private void Awake()
+        {
+            _finalizeMethod = FindObjectOfType<Turn>().ExecuteTurn;
+            HideComponent();
+        }
+
+        public abstract void ShowElements();
     
-    public void FinishComponent()
-    {
-        HideComponent();
-        finalizeMethod.Invoke();
-    }
+        public void FinishComponent()
+        {
+            HideComponent();
+            _finalizeMethod.Invoke();
+        }
 
-    protected abstract void HideComponent();
+        protected abstract void HideComponent();
+    }
 }

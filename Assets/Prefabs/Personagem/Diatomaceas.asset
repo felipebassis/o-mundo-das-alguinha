@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f91e0f81862426cb9c597d2c2b038df, type: 3}
   m_Name: Diatomaceas
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
-  _name: "Diatom\xE1ceas"
-  _color: {r: 0, g: 0, b: 0, a: 0}
+  sprite: {fileID: 0}
+  scientificName: Diatomaceas
+  color: {r: 0, g: 0, b: 0, a: 0}

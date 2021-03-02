@@ -1,41 +1,31 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Character", order = 1)]
-public class Character : ScriptableObject, ICharacter
+namespace Jogador
 {
-    [SerializeField] private Sprite sprite;
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Character", order = 1)]
+    public class Character : ScriptableObject, ICharacter
+    {
+        [SerializeField] private Sprite sprite;
 
-    [SerializeField] private string name;
+        [SerializeField] private string scientificName;
 
-    [SerializeField] private Color color;
+        [SerializeField] private Color color;
     
-    public Sprite GetSprite()
-    {
-        return sprite;
-    }
+        public Sprite GetSprite()
+        {
+            return sprite;
+        }
 
-    public void SetSprite(Sprite sprite)
-    {
-        this.sprite = sprite;
-    }
+        public string GetName()
+        {
+            return scientificName;
+        }
+        
 
-    public string GetName()
-    {
-        return name;
-    }
-
-    public void SetName(string name)
-    {
-        this.name = name;
-    }
-
-    public Color GetColor()
-    {
-        return color;
-    }
-
-    public void SetColor(Color color)
-    {
-        this.color = color;
+        public Color GetColor()
+        {
+            return color;
+        }
+        
     }
 }
