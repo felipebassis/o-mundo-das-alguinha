@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 2263540912868374606}
   - component: {fileID: 8628922370573165756}
   - component: {fileID: 3172281381940001096}
+  - component: {fileID: 2948600495358322410}
   m_Layer: 5
   m_Name: UI_PlayerStats
   m_TagString: Untagged
@@ -174,7 +175,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4400530169054166573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -187,7 +188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200.07, y: -100.42}
+  m_AnchoredPosition: {x: 1456, y: -67.99487}
   m_SizeDelta: {x: 248.11816, y: 75.08032}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8628922370573165756
@@ -227,6 +228,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2948600495358322410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400530169054166573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05997ed3b0174c2ca235197ef633a4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPosition: {fileID: 2254720661918159458}
+  playersDisplayedName: {fileID: 8882552725770569887}
+  playersSpriteImage: {fileID: 4656449833444561122}
+  playerColor: {fileID: 1759213002483273233}
+  display: {fileID: 4400530169054166573}
 --- !u!1 &5081371910979054774
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +331,7 @@ GameObject:
   - component: {fileID: 3797844262942499538}
   - component: {fileID: 2254720661918159458}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: PlayerPosition (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +464,7 @@ GameObject:
   - component: {fileID: 6540604198202260410}
   - component: {fileID: 8882552725770569887}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: PlayerName (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
