@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Turno;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Jogador
 {
-	public class CharacterSelector : IPlayerSelection
+	public class CharacterSelector : PlayerSelection
 	{
 		[SerializeField] private GameObject confirmedPlayers;
 		[SerializeField] private SingleCharacterSelector[] singleCharacterSelector;
@@ -20,19 +22,17 @@ namespace Jogador
 
 		public override IPlayerDetails[] GetPlayers()
 		{
-			var players = new IPlayerDetails[5];
+			var players = new List<IPlayerDetails>();
 
-			for (var i = 0; i < 5; i++)
+			foreach (var characterSelector in singleCharacterSelector)
 			{
-				players[i] = singleCharacterSelector[i].GetPlayerCharacter();
+				if (characterSelector.IsSelected())
+				{
+					players.Add(characterSelector.GetPlayerCharacter());
+				}
 			}
 
-			return players;
-		}
-
-		public void ConfirmPlayers()
-		{
-			HideComponent();
+			return players.ToArray();
 		}
 	}
 

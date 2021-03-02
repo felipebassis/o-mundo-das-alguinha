@@ -6,24 +6,24 @@ using UnityEngine;
 
 public class Turn : MonoBehaviour
 {
-    [SerializeField] private IPlayerSelection _playerSelection;
+    [SerializeField] private PlayerSelection _playerSelection;
     [SerializeField] private IStartComponent _startTurn;
-    [SerializeField] private IMoveComponent _diceRoll;
+    [SerializeField] private MoveComponent _diceRoll;
     [SerializeField] private PlayerBoardMovement _playerMovement;
     [SerializeField] private IEventComponent _eventCardExecuter;
-    [SerializeField] private IMoveComponent _questionCardExecuter;
-    [SerializeField] private ITurnComponent _finishedTurn;
-    [SerializeField] private ITurnComponent _playerWin;
+    [SerializeField] private MoveComponent _questionCardExecuter;
+    [SerializeField] private TurnComponent _finishedTurn;
+    [SerializeField] private TurnComponent _playerWin;
 
     private IPlayerDetails[] players;
-    private Dictionary<TurnStates, (ITurnComponent, Func<TurnStates>)> _actionMap;
+    private Dictionary<TurnStates, (TurnComponent, Func<TurnStates>)> _actionMap;
     private IPlayerDetails currentPlayer => players[currentPlayerIndex];
     private TurnStates currentState = TurnStates.PLAYER_SELECTION;
     private int currentPlayerIndex = 0;
 
     private void Start()
     {
-        _actionMap = new Dictionary<TurnStates, (ITurnComponent, Func<TurnStates>)>
+        _actionMap = new Dictionary<TurnStates, (TurnComponent, Func<TurnStates>)>
         {
             {TurnStates.PLAYER_SELECTION, (_playerSelection, () => SelectPlayers()) },
             {TurnStates.START_TURN, (_startTurn, () => StartTurn()) },

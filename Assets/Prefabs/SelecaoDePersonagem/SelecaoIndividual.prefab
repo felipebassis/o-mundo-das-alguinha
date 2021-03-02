@@ -68,8 +68,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ef8624d0d4d15464ba859e9a296ac0fa, type: 2}
   - {fileID: 11400000, guid: 386a12edb6ded0045b289b1395d82efe, type: 2}
   - {fileID: 11400000, guid: d84f0448b69a75840a364076d08cd461, type: 2}
-  _characterDisplayedName: {fileID: 0}
-  _characterSpriteImage: {fileID: 0}
+  characterDisplayedName: {fileID: 4355500671228209375}
+  characterSpriteImage: {fileID: 1953807911341046537}
 --- !u!1 &178611184593052466
 GameObject:
   m_ObjectHideFlags: 0
