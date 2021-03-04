@@ -6,6 +6,7 @@ using UnityEngine;
 public class CellPosition : MonoBehaviour
 {
     [SerializeField] private CellBehaviour cell;
+    [SerializeField] private SpriteRenderer[] CellBorders;
     [SerializeField] private List<Transform> cellPositions1;
     [SerializeField] private List<Transform> cellPositions2; 
     [SerializeField] private List<Transform> cellPositions3; 
