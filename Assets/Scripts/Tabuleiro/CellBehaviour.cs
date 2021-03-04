@@ -1,18 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CellBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private CellType cell;
+    [SerializeField] private int cellNumber;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int CellNumber => cellNumber;
+    public CellType Type => cell;
 }

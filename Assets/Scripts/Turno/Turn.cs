@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Jogador;
 using Turno;
 using UnityEngine;
 
@@ -9,15 +8,16 @@ public class Turn : MonoBehaviour
     [SerializeField] private PlayerSelection _playerSelection;
     [SerializeField] private IStartComponent _startTurn;
     [SerializeField] private DiceComponent _diceRoll;
-    [SerializeField] private PlayerBoardMovement _playerMovement;
+    [SerializeField] private IPlayerBoardMovement _playerMovement;
     [SerializeField] private IEventComponent _eventCardExecuter;
     [SerializeField] private MoveComponent _questionCardExecuter;
     [SerializeField] private TurnComponent _finishedTurn;
     [SerializeField] private TurnComponent _playerWin;
+    [SerializeField] private PlayerMovement[] _possiblePlayers;
 
-    private IPlayerDetails[] players;
+    private PlayerMovement[] players;
     private Dictionary<TurnStates, (TurnComponent, Func<TurnStates>)> _actionMap;
-    private IPlayerDetails currentPlayer => players[currentPlayerIndex];
+    private PlayerMovement currentPlayer => players[currentPlayerIndex];
     private TurnStates currentState = TurnStates.PLAYER_SELECTION;
     private int currentPlayerIndex = 0;
 
@@ -36,12 +36,12 @@ public class Turn : MonoBehaviour
             {TurnStates.PLAYER_WIN, (_playerWin, () => WinGame()) }
         };
 
-         _playerSelection.ShowElements();
+        _playerSelection.ShowElements();
     }
 
     public void ExecuteTurn()
     {
-        var(_, turnAction) = _actionMap[currentState];
+        var (_, turnAction) = _actionMap[currentState];
 
         var nextState = turnAction.Invoke();
 
@@ -54,10 +54,19 @@ public class Turn : MonoBehaviour
 
     private TurnStates SelectPlayers()
     {
-        players = _playerSelection.GetPlayers();
+        var playersDetails = _playerSelection.GetPlayers();
+        players = new PlayerMovement[playersDetails.Length];
+
+        for (int x = 0; x < playersDetails.Length; x++)
+        {
+            players[x] = _possiblePlayers[x];
+            players[x].SetPlayerDetails(playersDetails[x]);
+        }
+
+        _playerMovement.SetInnitialPosition(players);
 
         currentPlayerIndex = 0;
-        _startTurn.SetPlayer(currentPlayer);
+        _startTurn.SetPlayer(currentPlayer.GetDetails());
 
         return TurnStates.START_TURN;
     }
@@ -89,7 +98,7 @@ public class Turn : MonoBehaviour
 
         if (isAEventCell)
         {
-            _eventCardExecuter.SetPlayer(currentPlayer);
+            _eventCardExecuter.SetPlayer(currentPlayer.GetDetails());
             return TurnStates.EVENT;
 
         }
@@ -120,7 +129,7 @@ public class Turn : MonoBehaviour
 
     private TurnStates GetPlayerAnswer()
     {
-        var quantityToWalk =_questionCardExecuter.GetQuantityToMove();
+        var quantityToWalk = _questionCardExecuter.GetQuantityToMove();
 
         _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
 
@@ -138,7 +147,7 @@ public class Turn : MonoBehaviour
 
         currentPlayerIndex = currentPlayerIndex + 1 == players.Length ? 0 : currentPlayerIndex + 1;
 
-        _startTurn.SetPlayer(currentPlayer);
+        _startTurn.SetPlayer(currentPlayer.GetDetails());
 
         return TurnStates.START_TURN;
     }

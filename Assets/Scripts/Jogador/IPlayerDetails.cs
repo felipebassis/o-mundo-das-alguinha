@@ -7,5 +7,6 @@
         int GetPosition();
 
         void SetPosition(int playerCell);
+
     }
 }
