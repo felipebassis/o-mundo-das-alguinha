@@ -8,7 +8,7 @@ public class Turn : MonoBehaviour
 {
     [SerializeField] private PlayerSelection _playerSelection;
     [SerializeField] private IStartComponent _startTurn;
-    [SerializeField] private MoveComponent _diceRoll;
+    [SerializeField] private DiceComponent _diceRoll;
     [SerializeField] private PlayerBoardMovement _playerMovement;
     [SerializeField] private IEventComponent _eventCardExecuter;
     [SerializeField] private MoveComponent _questionCardExecuter;
@@ -67,7 +67,7 @@ public class Turn : MonoBehaviour
 
     private TurnStates GetPlayerDiceRoll()
     {
-        var quantityToWalk = _diceRoll.GetQuantityToMove();
+        var quantityToWalk = _diceRoll.RollDice();
 
         _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
 
