@@ -8,7 +8,7 @@ public class Turn : MonoBehaviour
     [SerializeField] private PlayerSelection _playerSelection;
     [SerializeField] private IStartComponent _startTurn;
     [SerializeField] private DiceComponent _diceRoll;
-    [SerializeField] private PlayerBoardMovement _playerMovement;
+    [SerializeField] private IPlayerBoardMovement _playerMovement;
     [SerializeField] private IEventComponent _eventCardExecuter;
     [SerializeField] private MoveComponent _questionCardExecuter;
     [SerializeField] private TurnComponent _finishedTurn;
