@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using Jogador;
 using Turno;
 using UnityEngine;
 
@@ -15,10 +13,11 @@ public class Turn : MonoBehaviour
     [SerializeField] private MoveComponent _questionCardExecuter;
     [SerializeField] private TurnComponent _finishedTurn;
     [SerializeField] private TurnComponent _playerWin;
+    [SerializeField] private PlayerMovement[] _possiblePlayers;
 
-    private IPlayerDetails[] players;
+    private PlayerMovement[] players;
     private Dictionary<TurnStates, (TurnComponent, Func<TurnStates>)> _actionMap;
-    private IPlayerDetails currentPlayer => players[currentPlayerIndex];
+    private PlayerMovement currentPlayer => players[currentPlayerIndex];
     private TurnStates currentState = TurnStates.PLAYER_SELECTION;
     private int currentPlayerIndex = 0;
 
@@ -55,12 +54,19 @@ public class Turn : MonoBehaviour
 
     private TurnStates SelectPlayers()
     {
-        players = _playerSelection.GetPlayers();
+        var playersDetails = _playerSelection.GetPlayers();
+        players = new PlayerMovement[playersDetails.Length];
 
-        _playerMovement.SetInnitialPosition(players.Select(x => x.GetPlayerMovement()).ToArray());
+        for (int x = 0; x < playersDetails.Length; x++)
+        {
+            players[x] = _possiblePlayers[x];
+            players[x].SetPlayerDetails(playersDetails[x]);
+        }
+
+        _playerMovement.SetInnitialPosition(players);
 
         currentPlayerIndex = 0;
-        _startTurn.SetPlayer(currentPlayer);
+        _startTurn.SetPlayer(currentPlayer.GetDetails());
 
         return TurnStates.START_TURN;
     }
@@ -72,7 +78,7 @@ public class Turn : MonoBehaviour
     {
         var quantityToWalk = _diceRoll.RollDice();
 
-        _playerMovement.SetPlayerMovement(currentPlayer.GetPlayerMovement(), quantityToWalk);
+        _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
 
         return TurnStates.DICE_MOVEMENT;
     }
@@ -92,7 +98,7 @@ public class Turn : MonoBehaviour
 
         if (isAEventCell)
         {
-            _eventCardExecuter.SetPlayer(currentPlayer);
+            _eventCardExecuter.SetPlayer(currentPlayer.GetDetails());
             return TurnStates.EVENT;
 
         }
@@ -116,7 +122,7 @@ public class Turn : MonoBehaviour
             return TurnStates.FINISHED_TURN;
         }
 
-        _playerMovement.SetPlayerMovement(currentPlayer.GetPlayerMovement(), quantityToWalk);
+        _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
 
         return TurnStates.EVENT_MOVEMENT;
     }
@@ -125,14 +131,14 @@ public class Turn : MonoBehaviour
     {
         var quantityToWalk = _questionCardExecuter.GetQuantityToMove();
 
-        _playerMovement.SetPlayerMovement(currentPlayer.GetPlayerMovement(), quantityToWalk);
+        _playerMovement.SetPlayerMovement(currentPlayer, quantityToWalk);
 
         return TurnStates.EVENT_MOVEMENT;
     }
 
     private TurnStates EndTurn()
     {
-        var playerWon = _playerMovement.IsWinner(currentPlayer.GetPlayerMovement());
+        var playerWon = _playerMovement.IsWinner(currentPlayer);
 
         if (playerWon)
         {
@@ -141,7 +147,7 @@ public class Turn : MonoBehaviour
 
         currentPlayerIndex = currentPlayerIndex + 1 == players.Length ? 0 : currentPlayerIndex + 1;
 
-        _startTurn.SetPlayer(currentPlayer);
+        _startTurn.SetPlayer(currentPlayer.GetDetails());
 
         return TurnStates.START_TURN;
     }

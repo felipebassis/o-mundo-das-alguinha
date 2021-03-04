@@ -1,4 +1,6 @@
-﻿public abstract class IPlayerBoardMovement: ITurnComponent
+﻿using Turno;
+
+public abstract class IPlayerBoardMovement: TurnComponent
 {
     public abstract void SetInnitialPosition(PlayerMovement[] players);
     public abstract void SetPlayerMovement(PlayerMovement player, int quantityToWalk);
