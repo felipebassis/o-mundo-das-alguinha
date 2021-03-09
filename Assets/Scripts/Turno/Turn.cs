@@ -6,13 +6,13 @@ using UnityEngine;
 public class Turn : MonoBehaviour
 {
     [SerializeField] private PlayerSelection _playerSelection;
-    [SerializeField] private IStartComponent _startTurn;
+    [SerializeField] private StartComponent _startTurn;
     [SerializeField] private DiceComponent _diceRoll;
     [SerializeField] private IPlayerBoardMovement _playerMovement;
     [SerializeField] private IEventComponent _eventCardExecuter;
     [SerializeField] private MoveComponent _questionCardExecuter;
-    [SerializeField] private TurnComponent _finishedTurn;
-    [SerializeField] private TurnComponent _playerWin;
+    [SerializeField] private EndTurn _finishedTurn;
+    [SerializeField] private GameOver _gameOverScreen;
     [SerializeField] private PlayerMovement[] _possiblePlayers;
 
     private PlayerMovement[] players;
@@ -33,7 +33,7 @@ public class Turn : MonoBehaviour
             {TurnStates.QUESTION, (_questionCardExecuter, () => GetPlayerAnswer()) },
             {TurnStates.EVENT_MOVEMENT, (_playerMovement, () => GetPlayerLandedCell()) },
             {TurnStates.FINISHED_TURN, (_finishedTurn, () => EndTurn()) },
-            {TurnStates.PLAYER_WIN, (_playerWin, () => WinGame()) }
+            {TurnStates.PLAYER_WIN, (_gameOverScreen, () => WinGame()) }
         };
 
         _playerSelection.ShowElements();
@@ -154,7 +154,7 @@ public class Turn : MonoBehaviour
 
     private TurnStates WinGame()
     {
-        // Envia para o _playerWin todos os dados dos jogadores
+        _gameOverScreen.SetPlayerData(players);
         return TurnStates.PLAYER_WIN;
     }
 }
