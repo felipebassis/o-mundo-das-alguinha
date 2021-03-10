@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f91e0f81862426cb9c597d2c2b038df, type: 3}
   m_Name: Dinoflagelada
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -5882913991197274928, guid: fe7a500071cd1d94295a671e976930ba, type: 3}
   scientificName: Dinoflagelada
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 0}

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f91e0f81862426cb9c597d2c2b038df, type: 3}
-  m_Name: AlgaVerde
+  m_Name: Chlorophyceae
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  scientificName: Alga Verde
-  color: {r: 0, g: 0, b: 0, a: 0}
+  sprite: {fileID: 7348010497445756419, guid: 1b5ff39daf6d31a43a00deb295ce8df3, type: 3}
+  scientificName: Chlorophyceae
+  color: {r: 1, g: 1, b: 1, a: 0}
